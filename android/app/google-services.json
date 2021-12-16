@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "532634367518",
+    "project_id": "bucketlist-24fcf",
+    "storage_bucket": "bucketlist-24fcf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532634367518:android:d4ca640a84b83dfd7e600f",
+        "android_client_info": {
+          "package_name": "com.bucketlist"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "532634367518-43anev6fbj4v9fjl4ef4th2gi4nqvo18.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bucketlist",
+            "certificate_hash": "bd24fec80651da22dfb94070fc6d1513165925ac"
+          }
+        },
+        {
+          "client_id": "532634367518-taidr0mdmpigks7jsdanogo1mhjama59.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcsLd71TkFeMELAWXXLvQp3nOxqdUo8Yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "532634367518-taidr0mdmpigks7jsdanogo1mhjama59.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
