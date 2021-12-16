@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, ActivityIndicator} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import auth from '@react-native-firebase/auth';
@@ -18,7 +18,6 @@ export default function App() {
       if (mounted) {
         setUser(response);
         setLoaded(true);
-        console.log('authstatechanged');
       }
     });
 
@@ -27,8 +26,18 @@ export default function App() {
     };
   }, []);
 
-  if (!user) return <Login />;
+  // return a loading spinner when checking auth state
+  if (!loaded)
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size={'large'} />
+      </View>
+    );
 
+  // return the login component when user is not logged in
+  if (loaded && !user) return <Login />;
+
+  // return the main app component when user is logged in
   return (
     <NavigationContainer style={styles.container}>
       <Stack.Navigator
