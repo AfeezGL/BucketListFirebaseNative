@@ -1,3 +1,6 @@
+import auth from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+import {useNavigation} from '@react-navigation/native';
 import React, {useState} from 'react';
 import {
   View,
@@ -10,6 +13,8 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const AddTask = () => {
+  const user = auth().currentUser;
+  const navigation = useNavigation();
   const [text, setText] = useState('');
   const [showAlert, setShowAlert] = useState(false);
 
@@ -19,44 +24,41 @@ const AddTask = () => {
   };
 
   //function for creating new task
-  const submitForm = async () => {
-    // if (!text) {
-    //   Alert.alert('Error', "Task can't be empty", [{text: 'Ok'}], {
-    //     cancelable: true,
-    //   });
-    //   return;
-    // }
-    // let deviceId = await AsyncStorage.getItem('uuid');
-    // fetch(`${baseUrl}/api/todo/`, {
-    //   method: 'POST',
-    //   mode: 'cors',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({
-    //     text: text,
-    //     uuid: deviceId,
-    //   }),
-    // })
-    //   .then(response => response.json())
-    //   .then(() => {
-    //     setText('');
-    //     setShowAlert(!showAlert);
-    //     setTimeout(() => {
-    //       setShowAlert(false);
-    //     }, 1000);
-    //   })
-    //   .catch(error => {
-    //     Alert.alert('Error', `${error.message}`, [{text: 'Ok'}], {
-    //       cancelable: true,
-    //     });
-    //   });
+  const submitForm = () => {
+    if (!text) {
+      Alert.alert('Error', "Task can't be empty", [{text: 'Ok'}]);
+      return;
+    }
+    try {
+      firestore()
+        .collection('users')
+        .doc(user.uid)
+        .collection('targets')
+        .add({
+          task: text,
+          completed: false,
+          timestamp: firestore.FieldValue.serverTimestamp(),
+        })
+        .then(() => {
+          setText('');
+          setShowAlert(!showAlert);
+          setTimeout(() => {
+            setShowAlert(false);
+          }, 1000);
+        });
+    } catch (error) {
+      Alert.alert('Error', `${error.message}`, [{text: 'Ok'}]);
+    }
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity style={styles.backBtn}>
+        <TouchableOpacity
+          style={styles.backBtn}
+          onPress={() => {
+            navigation.goBack();
+          }}>
           <Icon name="arrow-left" size={27} color="black" />
         </TouchableOpacity>
         <Text style={styles.text}> Add New</Text>
