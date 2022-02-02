@@ -90,7 +90,12 @@ const Tasks = () => {
         <FlatList
           data={completed}
           renderItem={({item}) => (
-            <Text style={{textDecorationLine: 'line-through', fontSize: 18}}>
+            <Text
+              style={{
+                textDecorationLine: 'line-through',
+                fontSize: 18,
+                color: 'black',
+              }}>
               {item.data.task}
             </Text>
           )}
@@ -153,6 +158,7 @@ const styles = StyleSheet.create({
   },
   no: {
     fontSize: 18,
+    color: 'black',
   },
 });
 export default Tasks;

@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 27,
+    color: 'black',
   },
   input: {
     fontSize: 21.6,
@@ -100,6 +101,7 @@ const styles = StyleSheet.create({
     borderRadius: 6,
     borderColor: 'black',
     borderWidth: 1,
+    color: 'black',
   },
   form: {
     height: 500,
